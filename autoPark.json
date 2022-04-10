@@ -2,19 +2,38 @@
   {
     "id": 1,
     "name": "Renault Magnum",
-    "driver": "",
+    "driver": {
+      "id": 0,
+      "name": "",
+      "truck": {
+        "id": 0
+      }
+    },
     "state": "ON_BASE"
   },
   {
     "id": 2,
     "name": "Volvo FH12    ",
-    "driver": "",
+    "driver": {
+      "id": 0,
+      "name": "",
+      "truck": {
+        "id": 0
+      }
+    },
     "state": "ON_BASE"
   },
   {
     "id": 3,
     "name": "DAF XF        ",
-    "driver": "",
+    "driver": {
+      "id": 0,
+      "name": "",
+      "truck": {
+        "id": 0
+      }
+    },
     "state": "ON_BASE"
   }
+]}
 ]

@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "name": "Sasha",
+    "truck": {
+      "id": 0
+    }
+  },
+  {
+    "id": 2,
+    "name": "Petya",
+    "truck": {
+      "id": 0
+    }
+  },
+  {
+    "id": 3,
+    "name": "Vasya",
+    "truck": {
+      "id": 0
+    }
+  }
+]   "id": 3,
+    "name": "Vasya",
+    "truck": {
+      "id": 0
+    }
+  }
+]]

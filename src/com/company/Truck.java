@@ -4,13 +4,13 @@ public class Truck {
 
     private int id;
     private String name;
-    private String driver;
+    private Driver driver;
     private State state;
 
     public Truck() {
     }
 
-    public Truck(int id, String name, String driver, State state) {
+    public Truck(int id, String name, Driver driver, State state) {
         this.id = id;
         this.name = name;
         this.driver = driver;
@@ -33,11 +33,11 @@ public class Truck {
         this.name = name;
     }
 
-    public String getDriver() {
+    public Driver getDriver() {
         return driver;
     }
 
-    public void setDriver(String driver) {
+    public void setDriver(Driver driver) {
         this.driver = driver;
     }
 
@@ -51,6 +51,6 @@ public class Truck {
 
     @Override
     public String toString() {
-        return "  " + id + "  | " + name + "    | " + driver + "           | " + state;
+        return "  " + id + "  | " + name + "    | " + driver.getName() + "           | " + state;
     }
 }
