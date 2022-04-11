@@ -9,6 +9,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.Objects;
+import java.util.Random;
+import java.util.Scanner;
 
 public class Main {
 
@@ -19,7 +22,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Driver nully = new Driver(0, "");
+        Driver nully = new Driver(0, "     ");
 
         Driver[] drivers = {
              new Driver(1, "Sasha"),
@@ -40,9 +43,13 @@ public class Main {
         writer(autoPark, WRITE_PATH);
         writer(driver, WRITE_PATH_FOR_DRIVERS);
 
-        showAutoPark(trucks);
-        System.out.println("-------------------------------------------------");
-        showDrivers(drivers);
+        //showAutoPark(trucks);
+        //System.out.println("-------------------------------------------------");
+        //showDrivers(drivers);
+
+        while (true) {
+            manageAutoPark(trucks, drivers);
+        }
 
 
     }
@@ -93,4 +100,106 @@ public class Main {
             System.out.println(drivers[i]);
         }
     }
+
+    private static void manageAutoPark(Truck[] trucks, Driver[] drivers) {
+        Scanner scanner = new Scanner(System.in);
+        Random random = new Random();
+
+        System.out.println("-----------------Trucks-----------------");
+        showAutoPark(trucks);
+        System.out.print("Chose one of the truck: ");
+        int a = scanner.nextInt();
+        for (int i = 0; i < trucks.length; i++) {
+            if (a != trucks[i].getId()) {
+                System.out.println("There is not truck with id: " + a);
+            }
+        }
+        truckInfo(trucks[(a - 1)]);
+        System.out.println("Press 1 to change Driver");
+        System.out.println("Press 2 to send to the Route");
+        System.out.println("Press 3 to sent to Repairing");
+        int b = scanner.nextInt();
+        if (b == 1) {
+            if (trucks[(a - 1)].getState().equals(State.ROUTE)) {
+                System.out.println("------------------------------------");
+                System.err.println("Truck on the road, you cant change driver");
+                System.out.println("------------------------------------");
+            }else if (trucks[(a - 1)].getState().equals(State.REPAIR)) {
+                System.out.println("-----------------------------------------");
+                System.out.println("You cant change driver, truck on the repair");
+                System.out.println("-----------------------------------------");
+            } else {
+                changeDriver(trucks[(a - 1)], drivers);
+            }
+        } else if (b == 2) {
+
+            if (trucks[(a - 1)].getState().equals(State.REPAIR)) {
+                if (random.nextInt(2) % 2 == 1) {
+                    trucks[a - 1].startDriving();
+
+                } else {
+                    trucks[a - 1].startRepair();
+                }
+            } else {
+                trucks[a - 1].startDriving();
+            }
+
+            if (trucks[a - 1].getDriver().getId() != 0) {
+                trucks[a - 1].startDriving();
+            } else {
+                System.out.println(trucks[a - 1].getName() + " have no driver");
+            }
+            if (trucks[a - 1].getState().equals(State.ROUTE)) {
+                System.out.println("-----------------------------------");
+                System.err.println("Truck already on the road");
+                System.out.println("-----------------------------------");
+            }
+        } else if (b == 3) {
+
+            if (trucks[a - 1].getState().equals(State.REPAIR)) {
+                System.out.println("-----------------------------------");
+                System.err.println("Truck already on the repair");
+                System.out.println("-----------------------------------");
+            } else {
+                trucks[a - 1].startRepair();
+            }
+        } else {
+            System.out.println("eeerrrr");
+        }
+        truckInfo(trucks[(a - 1)]);
+        showDrivers(drivers);
+
+
+    }
+
+    private static void truckInfo(Truck truck) {
+        System.out.println("----------Truck-INF------------");
+
+        System.out.println("  N          : " + truck.getId());
+        System.out.println("  Bus        : " + truck.getName());
+        System.out.println("  Driver     : " + truck.getDriver().getName());
+        System.out.println("  Bus State  : " + truck.getState());
+    }
+
+    private static void changeDriver(Truck truck, Driver[] drivers) {
+
+        System.out.println("------------------------------------");
+
+        for (Driver driver : drivers) {
+            if (driver.getId() != 0 && driver.getTruck().getId() == 0) {
+                truck.changeDriver(driver);
+                driver.setTruck(truck);
+                System.out.println("Driver changed successfully");
+                System.out.println("--------------------------------------");
+                break;
+            }
+        }
+
+        if (truck.getDriver().getId() == 0) {
+            System.out.println("There is no free drivers");
+            System.out.println("------------------------------------");
+        }
+    }
+
+
 }

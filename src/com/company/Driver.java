@@ -4,7 +4,7 @@ public class Driver {
 
     private int id;
     private String name;
-    private Truck truck = new Truck();
+    private Truck truck = new Truck(0, null, null, null);
 
     public Driver() {
     }

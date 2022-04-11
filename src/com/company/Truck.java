@@ -37,7 +37,7 @@ public class Truck {
         return driver;
     }
 
-    public void setDriver(Driver driver) {
+    public void changeDriver(Driver driver) {
         this.driver = driver;
     }
 
@@ -45,8 +45,18 @@ public class Truck {
         return state;
     }
 
-    public void setState(State state) {
-        this.state = state;
+    public void startDriving() {
+        this.state = State.ROUTE;
+        System.out.println("--------------------------------------");
+        System.out.println("Successfully on the road");
+        System.out.println("--------------------------------------");
+    }
+
+    public void startRepair() {
+        this.state = State.REPAIR;
+        System.out.println("------------------------------------");
+        System.out.println("Truck successfully go to the repair");
+        System.out.println("------------------------------------");
     }
 
     @Override
