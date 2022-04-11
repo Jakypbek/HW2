@@ -40,17 +40,19 @@ public class Main {
 
         String driver = GSON.toJson(drivers);
 
+        int i = 0;
+
+        while (i < 10) {
+            manageAutoPark(trucks, drivers);
+            i++;
+        }
+
+
+
         writer(autoPark, WRITE_PATH);
         writer(driver, WRITE_PATH_FOR_DRIVERS);
 
-        //showAutoPark(trucks);
-        //System.out.println("-------------------------------------------------");
-        //showDrivers(drivers);
-
-        while (true) {
-            manageAutoPark(trucks, drivers);
-        }
-
+        System.out.println(reader());
 
     }
     private static void writer(String object, Path path) {
@@ -168,6 +170,7 @@ public class Main {
         }
         truckInfo(trucks[(a - 1)]);
         showDrivers(drivers);
+
 
 
     }
